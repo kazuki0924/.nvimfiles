@@ -44,3 +44,5 @@ nmap gcc <Plug>VSCodeCommentaryLine
 " if !exists('g:vscode')
 "   source $HOME/.nvimfiles/vimscripts/init.vim
 " endif
+
+source ~/.nvimfiles/vimscripts/keymap/common.vim
