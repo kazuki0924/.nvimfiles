@@ -12,14 +12,11 @@ endif
 
 all: setup
 
-git/pull:
-> @ echo git pull .nvimfiles:
-> @ [[ ! -d ~/.nvimfiles ]] && git clone https://github.com/kazuki0924/.nvimfiles ~/.nvimfiles
-> @ cd ~/.nvimfiles && git pull
-
 symlink:
 > @ ~/.dotscripts/tasks/symlink.sh .nvimfiles .config/nvim
 
-setup: git/pull symlink
+.PHONY: setup
 
-.PHONY: git/pull symlink setup
+setup: symlink
+
+.PHONY: symlink

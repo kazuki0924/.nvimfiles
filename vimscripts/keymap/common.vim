@@ -57,7 +57,7 @@ xnoremap <leader>p "_dP
 """"" {{ new line
 
 """ insert new line above and below cursor
-nnoremap oo mxo<esc>0"_Dg`x
-nnoremap OO mxO<esc>0"_Dg`x
+nnoremap <leader>o mxo<esc>0"_Dg`x
+nnoremap <leader>O mxO<esc>0"_Dg`x
 
 """"" new line }}
