@@ -15,7 +15,6 @@ set incsearch
 set hlsearch
 set laststatus=2
 set wildmenu
-set scrolloff=8
 set sidescrolloff=5
 set autoread
 set history=1000
@@ -24,6 +23,7 @@ set ruler
 set sessionoptions-=options
 set viewoptions-=options
 set noerrorbells
+set scrolloff=8
 set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
