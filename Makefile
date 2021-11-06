@@ -15,8 +15,8 @@ all: setup
 symlink:
 > @ ~/.dotscripts/tasks/symlink.sh .nvimfiles .config/nvim
 
-.PHONY: setup
+.PHONY: symlink
 
 setup: symlink
 
-.PHONY: symlink
+.PHONY: setup

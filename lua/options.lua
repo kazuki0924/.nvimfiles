@@ -52,12 +52,13 @@ o.breakindent = false
 -- test
 o.number = true
 o.scrolloff = 8
-o.tabstop = 4
-o.softtabstop = 4
+o.tabstop = 2
+o.softtabstop = 2
 o.shiftwidth = 2
 o.list = true
-o.listchars = 'space:⋅,tab:→ ,eol:↴'
+o.listchars = 'tab:→ ,eol:↴'
 o.termguicolors = true
+o.relativenumber = true
 
 
 -- termguicolors = true,
