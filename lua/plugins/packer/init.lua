@@ -1,34 +1,44 @@
-local plugins = {
+Plugins_List = {
   -- A use-package inspired plugin manager for Neovim
   -- packer.nvim can manage itself
   {'wbthomason/packer.nvim', opt = true},
 
-  -- A Dark Theme for neovim >= 0.5 based on Atom One Dark Theme written in lua with TreeSitter syntax highlight.
-  {'navarasu/onedark.nvim'},
+  -- automatically install language servers
+  {'williamboman/nvim-lsp-installer'}, {'navarasu/onedark.nvim'}, -- Theme inspired by Atom
 
-  -- Lua port of the most famous vim colorscheme
-  -- {'ellisonleao/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}},
-
-  -- { 'neovim/nvim-lspconfig' },
-  -- { 'kabouzeid/nvim-lspinstall' },
-  -- { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-
-  {'tpope/vim-commentary', keys = 'gc'},
-
-  -- indent guides for neovim
-  { "lukas-reineke/indent-blankline.nvim" },
-
-
-  -- lsp
-  {'neovim/nvim-lspconfig'},
-  {'williamboman/nvim-lsp-installer'},
+  {'tpope/vim-fugitive'}, -- Git commands in nvim
+  {'tpope/vim-rhubarb'}, -- Fugitive-companion to interact with github
+  {'tpope/vim-commentary'}, -- "gc" to comment visual regions/lines
+  {'tpope/vim-surround'}, -- quoting
+  -- {'ludovicchabant/vim-gutentags'}, -- Automatic tags management
+  -- UI to select things (files, grep results, open buffers...)
+  {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}},
+  {'itchyny/lightline.vim'}, -- Fancier statusline
+  -- Add indentation guides even on blank lines
+  {'lukas-reineke/indent-blankline.nvim'},
+  -- Add git related info in the signs columns and popups
+  {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}},
+  -- Highlight, edit, and navigate code using a fast incremental parsing library
+  {'nvim-treesitter/nvim-treesitter'}, -- Additional textobjects for treesitter
+  {'nvim-treesitter/nvim-treesitter-textobjects'}, {'neovim/nvim-lspconfig'}, -- Collection of configurations for built-in LSP client
+  {'hrsh7th/nvim-cmp'}, -- Autocompletion plugin
+  {'hrsh7th/cmp-nvim-lsp'}, {'saadparwaiz1/cmp_luasnip'}, {'L3MON4D3/LuaSnip'} -- Snippets pluginm
 }
 
 -- ensure packer.nvim is insalled
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+local install_path = vim.fn.stdpath('data') ..
+                       '/site/pack/packer/opt/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.cmd("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+  vim.cmd('!git clone https://github.com/wbthomason/packer.nvim ' ..
+            install_path)
 end
+
+vim.api.nvim_exec([[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost init.lua PackerCompile
+  augroup end
+]], false)
 
 -- Only required if you have packer configured as `opt`
 vim.cmd [[ packadd packer.nvim ]]
@@ -47,7 +57,7 @@ packer.init({
 })
 
 packer.startup(function(use)
-  for _, v in pairs(plugins) do
+  for _, v in pairs(Plugins_List) do
     use(v)
   end
 end)
