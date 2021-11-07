@@ -139,6 +139,11 @@ vim.api.nvim_set_keymap('n', '<leader>?',
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    'bash', 'css', 'dockerfile', 'go', 'gomod', 'graphql', 'hcl', 'html',
+    'javascript', 'jsdoc', 'json', 'lua', 'rust', 'toml', 'typescript', 'vim',
+    'yaml'
+  },
   highlight = {
     enable = true -- false will disable the whole extension
   },
