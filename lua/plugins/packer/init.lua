@@ -8,15 +8,20 @@ local plugins = {
 
   -- Lua port of the most famous vim colorscheme
   -- {'ellisonleao/gruvbox.nvim', requires = {'rktjmp/lush.nvim'}},
-	
-	-- { 'neovim/nvim-lspconfig' },
-	-- { 'kabouzeid/nvim-lspinstall' },
-	-- { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+
+  -- { 'neovim/nvim-lspconfig' },
+  -- { 'kabouzeid/nvim-lspinstall' },
+  -- { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 
   {'tpope/vim-commentary', keys = 'gc'},
 
   -- indent guides for neovim
-  { "lukas-reineke/indent-blankline.nvim" }
+  { "lukas-reineke/indent-blankline.nvim" },
+
+
+  -- lsp
+  {'neovim/nvim-lspconfig'},
+  {'williamboman/nvim-lsp-installer'},
 }
 
 -- ensure packer.nvim is insalled

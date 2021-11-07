@@ -56,10 +56,10 @@ o.tabstop = 2
 o.softtabstop = 2
 o.shiftwidth = 2
 o.list = true
-o.listchars = 'tab:→ ,eol:↴'
+o.listchars = 'extends:>,precedes:<,space: ,tab:→ ,eol:↴'
 o.termguicolors = true
 o.relativenumber = true
-
+o.expandtab = true
 
 -- termguicolors = true,
 -- mouse = "a",
