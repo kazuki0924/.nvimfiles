@@ -1,0 +1,44 @@
+{
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "plaintext",
+          "markdown",
+          "html",
+          "global"
+        ],
+        "path": "./global/global.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua/lua.json"
+      },
+      {
+        "language": "rust",
+        "path": "./rust/rust.json"
+      },
+      {
+        "language": "sql",
+        "path": "./sql/sql.json"
+      },
+      {
+        "language": [
+          "shellscript",
+          "shell",
+          "sh"
+        ],
+        "path": "./shell/shell.json"
+      },
+      {
+        "language": [
+          "markdown"
+        ],
+        "path": "./markdown/markdown.json"
+      }
+    ]
+  }
+}

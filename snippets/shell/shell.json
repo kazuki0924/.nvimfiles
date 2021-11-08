@@ -1,0 +1,227 @@
+{
+  "shbang": {
+    "prefix": "shb",
+    "body": [
+      "#!/usr/bin/env bash",
+      "set -Eeuo pipefail",
+      "IFS=\\$'\\n\\t'\n"
+    ]
+  },
+  "declare": {
+    "prefix": "d",
+    "body": [
+      "declare -r ${1:HOGE}"
+    ]
+  },
+  "use_var": {
+    "prefix": "uv",
+    "body": [
+      "\"\\${${1:HOGE}}\""
+    ]
+  },
+  "use_var_unquoted": {
+    "prefix": "uvu",
+    "body": [
+      "\\${${1:HOGE}}"
+    ]
+  },
+  "array": {
+    "prefix": "arr",
+    "body": [
+      "declare -r ${1:ITEMS}=(",
+      "\t${2:ITEM1}",
+      ")"
+    ]
+  },
+  "for_loop": {
+    "prefix": "forloop",
+    "body": [
+      "for ${3:ITEM} in \"\\${${1:ITEMS}[@]}\"; do",
+      "\t${4:COMMAND} \"\\${${3:ITEM}}\"",
+      "done",
+      "${0}"
+    ],
+    "description": "run commands in for loop"
+  },
+  "array_for_loop": {
+    "prefix": "arrforloop",
+    "body": [
+      "declare -r ${1:ITEMS}=(",
+      "\t${2:ITEM1}",
+      ")\n",
+      "for ${3:ITEM} in \"\\${${1:ITEMS}[@]}\"; do",
+      "\t${4:COMMAND} \"\\${${3:ITEM}}\"",
+      "done",
+      "${0}"
+    ],
+    "description": "declare a array and run commands in for loop"
+  },
+  "array_count": {
+    "prefix": "arrcount",
+    "body": [
+      "declare -r ${1:ITEMS}_COUNT=\"${#${1:ITEMS}[@]}\""
+    ]
+  },
+  "requirements_for_loop": {
+    "prefix": "req",
+    "body": [
+      "declare -r REQUIREMENTS=(",
+      "\t${1}",
+      ")\n",
+      "for REQUIREMENT in \"${REQUIREMENTS[@]}\"; do",
+      "\twhich \"\\${REQUIREMENT}\" &>/dev/null || brew install \"\\${REQUIREMENT}\"",
+      "done\n"
+    ],
+    "description": "install packages with homebrew"
+  },
+  "fzf_array": {
+    "prefix": "fzfarr",
+    "body": [
+      "${1:ITEMS}=(",
+      "\t${2:ITEM1}",
+      ")",
+      "LIST=\"\"",
+      "for ${3:ITEM} in \"\\${${1:ITEMS}[@]}\"; do",
+      "\tLIST+=\"\\${${3:ITEM}}\"",
+      "done\n",
+      "SELECTED=\"$(printf \"%b\" \"\\${LIST}\" | fzf --layout=reverse --height=20%)\"\n"
+    ],
+    "description": "fuzzy find and select from array"
+  },
+  "if_which": {
+    "prefix": "ifwhich",
+    "body": [
+      "if which ${1:COMMAND} &>/dev/null; then",
+      "\t${1:COMMAND} ${2:ARG}",
+      "fi\n"
+    ],
+    "description": "if command exists, execute it"
+  },
+  "echo_commands": {
+    "prefix": "ECHO_COMMANDS",
+    "body": [
+      "COMMANDS=(",
+      "\t\"${1:COMMAND}\"",
+      ")\n",
+      "function echo_commands {",
+      "\tfor COMMAND in \"\\${COMMANDS[@]}\"; do",
+      "\t\t echo \"\\${COMMAND}\"",
+      "\t\t eval \"\\${COMMAND}\"",
+      "\tdone",
+      "}\n"
+    ],
+    "description": "echo what the command before executing it"
+  },
+  "copy_file": {
+    "prefix": "COPY_FILE",
+    "body": "cp \"\\$HOME\"/${1:FILE1} \"\\$HOME\"/${2:FILE2}\n"
+  },
+  "move_file": {
+    "prefix": "MOVE_FILE",
+    "body": "mv \"\\$HOME\"/${1:FILE1} \"\\$HOME\"/${2:FILE2}\n"
+  },
+  "delete_if_exists": {
+    "prefix": "DELETE_IF_EXISTS",
+    "body": [
+      "FILE=\"\\$HOME/${1:FILE}\"",
+      "[[ -f \" \\$FILE\" ]] && trash-put \"\\$FILE\"\n"
+    ]
+  },
+  "read_stdin": {
+    "prefix": "READ_STDIN",
+    "body": [
+      "echo local ${1:VAR}",
+      "read -r ${1:VAR}",
+      "${2:COMMAND} \"\\$${1:VAR}\"\n"
+    ],
+    "description": "repl for writing snippets"
+  },
+  "mkdirs": {
+    "prefix": "MKDIRS",
+    "body": [
+      "DIRS=(",
+      "\t${1:DIR}",
+      ")\n",
+      "(",
+      "\tcd || exit",
+      "\tfor DIR in \"\\${DIRS[@]}\"; do",
+      "\t\t[ ! -d \"\\$HOME/\\$DIR\" ] && mkdir -p \"\\$HOME/\\$DIR\"",
+      "\t\techo created directory: \"\\$DIR\"",
+      "\tdone",
+      ")\n"
+    ]
+  },
+  "read": {
+    "prefix": "read",
+    "body": "read -r ${0:VAR}",
+    "description": "Read input of ${VAR}."
+  },
+  "if": {
+    "prefix": "if",
+    "body": "if [[ ${0:condition} ]]; then\n\t${1}\nfi",
+    "description": "An IF statement."
+  },
+  "elseif": {
+    "prefix": "elseif",
+    "body": "elif [[ ${0:condition} ]]; then\n\t${1}",
+    "description": "Add an elseif to an if statement."
+  },
+  "else": {
+    "prefix": "else",
+    "body": "else\n\t${0:command}",
+    "description": "else"
+  },
+  "for_in": {
+    "prefix": "for_in",
+    "body": "for ${0:VAR} in $${1:LIST}\ndo\n\techo \"$${0:VAR}\"\ndone\n",
+    "description": "for loop in list"
+  },
+  "for_i": {
+    "prefix": "for_i",
+    "body": "for ((${0:i} = 0; ${0:i} < ${1:10}; ${0:i}++)); do\n\techo \"$${0:i}\"\ndone\n",
+    "description": "An index-based iteration for loop."
+  },
+  "while": {
+    "prefix": "while",
+    "body": "while [[ ${1:condition} ]]; do\n\t${0}\ndone\n",
+    "description": "A while loop by condition."
+  },
+  "until": {
+    "prefix": "until",
+    "body": "until [[ ${1:condition} ]]; do\n\t${0}\ndone\n",
+    "description": "until loop by condition"
+  },
+  "function": {
+    "prefix": "function",
+    "body": "${1:name} ()\n{\n\t${0}\n}",
+    "description": [
+      "This defines a function named name.\n",
+      "The reserved word function is optional.\n",
+      "If the function reserved word is supplied, the parentheses are optional.\n",
+      "1. Recommended way:\n",
+      "name() {}\n",
+      "2. C-like-way:\nfunction name [()] {}"
+    ]
+  },
+  "case": {
+    "prefix": "case",
+    "body": "case \"$${0:VAR}\" in\n\t${1:1}) echo 1\n\t;;\n\t${2:2|3}) echo 2 or 3\n\t;;\n\t*) echo default\n\t;;\nesac\n",
+    "description": [
+      "case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac\n",
+      "A case command first expands word, and tries to match it against each pattern in turn."
+    ]
+  },
+  "break": {
+    "prefix": "break",
+    "body": "break ${0}",
+    "description": [
+      "The break command tells Bash to leave the loop straight away.\n",
+      "Enter the break or break (n) where n=number of loops."
+    ]
+  },
+  "expr": {
+    "prefix": "expr",
+    "body": "expr ${0:1 + 1}",
+    "description": "Calculate numbers with Bash."
+  }
+}

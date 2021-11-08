@@ -18,7 +18,7 @@ symlink:
 .PHONY: symlink
 
 packer/sync:
-> @ ~/.nvimfiles/packer_sync.sh
+> @ ~/.nvimfiles/scripts/nvim_packer_setup.sh
 
 .PHONY: packer/sync
 

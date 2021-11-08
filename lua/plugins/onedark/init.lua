@@ -3,4 +3,6 @@ vim.g.onedark_disable_toggle_style = true -- By default it is false
 
 vim.g.onedark_style = 'deep'
 
+vim.cmd [[colorscheme onedark]]
+
 require('onedark').setup()
