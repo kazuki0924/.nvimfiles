@@ -58,7 +58,32 @@ for _, ls in pairs(language_servers) do
       local opts = {}
 
       if requested_server.name == 'efm' then
-        opts.filetypes = {'sh', 'lua'}
+        opts = {
+          filetypes = {'sh', 'lua'},
+          init_options = {
+            hover = true,
+            documentSymbol = true,
+            codeAction = true,
+            completion = true
+          },
+          settings = {
+            rootMarkers = {'.git/'},
+            languages = {
+              lua = {{formatCommand = 'lua-format -i', formatStdin = true}},
+              sh = {
+                {
+                  formatCommand = 'shfmt -ci -s -bn',
+                  formatStdin = true,
+                  lintCommand = 'shellcheck -f gcc -x',
+                  lintFormats = {
+                    '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m',
+                    '%f:%l:%c: %tote: %m'
+                  }
+                }
+              }
+            }
+          }
+        }
       elseif requested_server.name == 'sumneko_lua' then
         opts.settings = {Lua = {diagnostics = {globals = {'vim'}}}}
       end
