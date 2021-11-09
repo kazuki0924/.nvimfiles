@@ -10,7 +10,8 @@
   "declare": {
     "prefix": "d",
     "body": [
-      "declare -r ${1:HOGE}"
+      "declare -r ${1:HOGE}=\"${2:FUGA}\"",
+      "${0}"
     ]
   },
   "use_var": {
