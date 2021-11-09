@@ -44,10 +44,32 @@ local on_attach = function(client, bufnr)
 end
 
 local language_servers = {
-  'ansiblels', 'bashls', 'cssls', 'diagnosticls', 'dockerls', 'efm', 'eslint',
-  'emmet_ls', 'gopls', 'graphql', 'html', 'jsonls', 'sumneko_lua', 'pylsp',
-  'pyright', 'rls', 'rust_analyzer', 'sqls', 'stylelint_lsp', 'tailwindcss',
-  'terraformls', 'tflint', 'tsserver', 'vimls', 'lemminx', 'yamlls'
+  'ansiblels',
+  'bashls',
+  'cssls',
+  'diagnosticls',
+  'dockerls',
+  'efm',
+  'eslint',
+  'emmet_ls',
+  'gopls',
+  'graphql',
+  'html',
+  'jsonls',
+  'sumneko_lua',
+  'pylsp',
+  'pyright',
+  'rls',
+  'rust_analyzer',
+  'sqls',
+  'stylelint_lsp',
+  'tailwindcss',
+  'terraformls',
+  'tflint',
+  'tsserver',
+  'vimls',
+  'lemminx',
+  'yamlls'
 }
 
 for _, ls in pairs(language_servers) do
@@ -76,7 +98,8 @@ for _, ls in pairs(language_servers) do
                   formatStdin = true,
                   lintCommand = 'shellcheck -f gcc -x',
                   lintFormats = {
-                    '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m',
+                    '%f:%l:%c: %trror: %m',
+                    '%f:%l:%c: %tarning: %m',
                     '%f:%l:%c: %tote: %m'
                   }
                 }
@@ -107,7 +130,8 @@ end
 vim.g.lightline = {
   active = {
     left = {
-      {'mode', 'paste'}, {'gitbranch', 'readonly', 'filename', 'modified'}
+      {'mode', 'paste'},
+      {'gitbranch', 'readonly', 'filename', 'modified'}
     }
   },
   component_function = {gitbranch = 'fugitive#head'}
@@ -173,8 +197,22 @@ vim.api.nvim_set_keymap('n', '<leader>?',
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
-    'bash', 'css', 'dockerfile', 'go', 'gomod', 'graphql', 'hcl', 'html',
-    'javascript', 'jsdoc', 'json', 'lua', 'rust', 'toml', 'typescript', 'vim',
+    'bash',
+    'css',
+    'dockerfile',
+    'go',
+    'gomod',
+    'graphql',
+    'hcl',
+    'html',
+    'javascript',
+    'jsdoc',
+    'json',
+    'lua',
+    'rust',
+    'toml',
+    'typescript',
+    'vim',
     'yaml'
   },
   highlight = {
@@ -228,7 +266,7 @@ cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
-    end,
+    end
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -239,7 +277,7 @@ cmp.setup {
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = true
     },
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
@@ -258,12 +296,22 @@ cmp.setup {
       else
         fallback()
       end
-    end,
+    end
   },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
+  sources = cmp.config.sources({
+    {name = 'nvim_lsp'},
+    {name = 'luasnip'} -- For luasnip users.
+  }, {{name = 'buffer'}})
 }
 
-require("luasnip/loaders/from_vscode").lazy_load({ paths = '~/.nvimfiles/snippets' })
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})
+})
+
+require('luasnip/loaders/from_vscode').lazy_load({
+  paths = '~/.nvimfiles/snippets'
+})

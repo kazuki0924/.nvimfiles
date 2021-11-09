@@ -4,7 +4,8 @@ Plugins_List = {
   {'wbthomason/packer.nvim', opt = true},
 
   -- automatically install language servers
-  {'williamboman/nvim-lsp-installer'}, {'navarasu/onedark.nvim'}, -- Theme inspired by Atom
+  {'williamboman/nvim-lsp-installer'},
+  {'navarasu/onedark.nvim'}, -- Theme inspired by Atom
 
   {'tpope/vim-fugitive'}, -- Git commands in nvim
   {'tpope/vim-rhubarb'}, -- Fugitive-companion to interact with github
@@ -20,9 +21,15 @@ Plugins_List = {
   {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}},
   -- Highlight, edit, and navigate code using a fast incremental parsing library
   {'nvim-treesitter/nvim-treesitter'}, -- Additional textobjects for treesitter
-  {'nvim-treesitter/nvim-treesitter-textobjects'}, {'neovim/nvim-lspconfig'}, -- Collection of configurations for built-in LSP client
+  {'nvim-treesitter/nvim-treesitter-textobjects'},
+  {'neovim/nvim-lspconfig'}, -- Collection of configurations for built-in LSP client
   {'hrsh7th/nvim-cmp'}, -- Autocompletion plugin
-  {'hrsh7th/cmp-nvim-lsp'}, {'saadparwaiz1/cmp_luasnip'}, {'L3MON4D3/LuaSnip'} -- Snippets pluginm
+  {'hrsh7th/cmp-buffer'},
+  {'hrsh7th/cmp-path'},
+  {'hrsh7th/cmp-cmdline'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'saadparwaiz1/cmp_luasnip'},
+  {'L3MON4D3/LuaSnip'} -- Snippets pluginm
 }
 
 -- ensure packer.nvim is insalled
