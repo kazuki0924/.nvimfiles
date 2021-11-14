@@ -91,17 +91,29 @@ for _, ls in pairs(language_servers) do
           settings = {
             rootMarkers = {'.git/'},
             languages = {
-              lua = {{formatCommand = 'lua-format -i', formatStdin = true}},
+              lua = {
+                {
+                  formatCommand = 'lua-format -i',
+                  formatStdin = true,
+                  prefix = 'luacheck',
+                  lintCommand = 'luacheck --codes --no-color --quiet -',
+                  lintStdin = true,
+                  lintFormats = {'%.%#:%l:%c: (%t%n) %m'}
+                }
+              },
               sh = {
                 {
                   formatCommand = 'shfmt -ci -s -bn',
                   formatStdin = true,
-                  lintCommand = 'shellcheck -f gcc -x',
+                  prefix = 'shellcheck',
+                  lintCommand = 'shellcheck --color=never --format=gcc -',
+                  lintStdin = true,
                   lintFormats = {
-                    '%f:%l:%c: %trror: %m',
-                    '%f:%l:%c: %tarning: %m',
-                    '%f:%l:%c: %tote: %m'
-                  }
+                    '-:%l:%c: %trror: %m',
+                    '-:%l:%c: %tarning: %m',
+                    '-:%l:%c: %tote: %m'
+                  },
+                  rootMarkers = {}
                 }
               }
             }

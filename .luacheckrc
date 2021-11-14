@@ -1,3 +1,1 @@
-globals = [
-  'vim'
-]
+globals = {'vim'}
