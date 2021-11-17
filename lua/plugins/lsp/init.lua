@@ -106,7 +106,7 @@ for _, ls in pairs(language_servers) do
                   formatCommand = 'shfmt -ci -s -bn',
                   formatStdin = true,
                   prefix = 'shellcheck',
-                  lintCommand = 'shellcheck --color=never --format=gcc -',
+                  lintCommand = 'shellcheck -x --color=never --format=gcc -',
                   lintStdin = true,
                   lintFormats = {
                     '-:%l:%c: %trror: %m',
