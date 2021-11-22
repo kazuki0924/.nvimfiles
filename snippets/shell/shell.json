@@ -70,6 +70,13 @@
       "declare -r ${1:ITEMS}_COUNT=\"${#${1:ITEMS}[@]}\""
     ]
   },
+  "separator": {
+    "prefix": "sep",
+    "body": [
+      "# ---------- ${1:COMMENT} ----------",
+      "${0}"
+    ]
+  },
   "requirements_for_loop": {
     "prefix": "req",
     "body": [
