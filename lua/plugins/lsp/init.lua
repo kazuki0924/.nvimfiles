@@ -120,7 +120,7 @@ for _, ls in pairs(language_servers) do
           }
         }
       elseif requested_server.name == 'sumneko_lua' then
-        opts.settings = {Lua = {diagnostics = {globals = {'vim'}}}}
+        opts.settings = {Lua = {diagnostics = {enable = false}}}
       end
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -13,7 +13,7 @@ endif
 all: setup
 
 symlink:
-> @ ~/.dotscripts/tasks/symlink.sh .nvimfiles .config/nvim
+> @ .symlink .nvimfiles .config/nvim
 
 .PHONY: symlink
 
