@@ -61,6 +61,9 @@ o.termguicolors = true
 o.relativenumber = true
 o.expandtab = true
 
+o.ttimeout = true
+o.ttimeoutlen = 50
+
 -- termguicolors = true,
 -- mouse = "a",
 -- errorbells = true,

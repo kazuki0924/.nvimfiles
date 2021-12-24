@@ -41,6 +41,12 @@
       ")"
     ]
   },
+  "mapfile": {
+    "prefix": "mf",
+    "body": [
+      "mapfile -t ${1:ARRAY} < <(${2:command})"
+    ]
+  },
   "for_loop": {
     "prefix": "forloop",
     "body": [
